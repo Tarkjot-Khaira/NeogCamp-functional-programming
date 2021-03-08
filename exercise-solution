@@ -1,0 +1,154 @@
+// Question No. 1
+const arr = [1,20,3,4,5,60,7];
+
+const addOddNumbers = function(accumulator, currentValue)
+{
+    
+    if(currentValue % 2 !=0)
+    {
+        accumulator = accumulator + currentValue;
+    }
+    return (accumulator);
+}
+let sum = arr.reduce(addOddNumbers,0);
+
+console.log(sum);
+
+// Question No. 2
+const addNumbersAtOddIndices = function(accumulator,currentValue,currentIndex)
+{
+    if(currentIndex % 2 != 0)
+    {
+        accumulator = accumulator + currentValue;
+    }
+
+    return accumulator;
+}
+
+sum = arr.reduce(addNumbersAtOddIndices,0);
+
+console.log(sum);
+
+// Question No. 3
+const biggestNumber = function(accumulator,currentValue)
+{
+    if(currentValue > accumulator)
+    {
+        accumulator = currentValue;
+    }
+    return accumulator;
+}
+
+bigNum = arr.reduce(biggestNumber,0);
+
+console.log(bigNum);
+
+// Question No.4
+const divisibleBy10 = function(item){
+    if( item % 10 == 0)
+    {
+        console.log(item);
+        return item;
+    }
+}
+const numDivisibleBy10 = arr.map(divisibleBy10);
+
+console.log(numDivisibleBy10);
+
+//Question No.5
+const modifyArr = function(item)
+{
+    if(item % 2 == 0)
+    {
+        return item + 1;
+    }
+    else{
+        return item - 1;
+    }
+}
+
+const newArr = arr.map(modifyArr);
+
+console.log(newArr);
+
+//Question No. 6
+const evenOddSum = function(allSum, currentValue) {
+    if (currentValue %2 == 0) {
+      allSum["even"] = allSum["even"] + currentValue;
+    }
+    else {
+      allSum["odd"] = allSum["odd"] + currentValue;
+    }
+    return allSum
+  }
+
+let countedEvenOddSum = arr.reduce(evenOddSum,{"even":0,"odd":0})
+
+console.log(countedEvenOddSum);
+
+//Question No. 8
+const input = ["apple","orange","mango","papaya"];
+
+const countChar = function(allCharCount,currentValue)
+{
+    if (currentValue.length in allCharCount) {
+        allCharCount[currentValue.length]++;
+    }
+      else {
+        allCharCount[currentValue.length] = 1;
+    }
+    return allCharCount;
+}
+
+const output = input.reduce(countChar,{});
+
+console.log(output);
+
+//Question No. 9
+const input2 = [...input,"fghj","sdf","asd"];
+
+const stringsWithVowel = function(item)
+{
+    if(/[aeiou]/.test(item))
+    {
+        return item;
+    }
+}
+
+const output2 = input2.map(stringsWithVowel);
+
+console.log(output2);
+
+//Question No. 10
+const countStringLength = function(currentValue)
+{
+    return {[currentValue]:currentValue.length};
+}
+
+const allStringLength = input.map(countStringLength);
+
+console.log(allStringLength);
+
+
+//The One Homework
+let compose = function(...funArr){
+
+    return funArr.reduce(function(accum,currentValue){
+
+        return function(num){
+
+            return currentValue(accum(num));
+            
+        }
+    }
+)
+}
+
+const increament = num => num +1;
+const square = num => num*num;
+const cube = num => num*num*num;
+
+
+let combineFunctions = compose(increament,square,cube);
+
+console.log(combineFunctions(2));
